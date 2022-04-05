@@ -4,7 +4,7 @@ const crypto = require('crypto')
 
 function _serialize(obj) {
   if (Array.isArray(obj)) {
-    return `[${obj.map(el => _serialize(el)).join(',')}]`
+    return `[${obj.map(el => _serialize(el)).sort().join(',')}]`
   } else if (typeof obj === 'object' && obj !== null) {
     let acc  = ''
     const keys = Object.keys(obj).sort()

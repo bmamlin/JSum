@@ -16,7 +16,7 @@ describe('JSum', function () {
 
   it('should correctly handle arrays', function () {
     expect(jsum.serialize([1, 2, true, 'false']))
-      .to.be.equal('[1,2,true,"false"]')
+      .to.be.equal('["false",1,2,true]')
   })
 
   it('should correctly sort object members', function () {
@@ -60,5 +60,10 @@ describe('JSum', function () {
   it('should properly sort nested objects', function () {
     expect(jsum.serialize({ x: 3, a: { z: { l: 4, k: 3, a: 1, b: 2 }, c: 1 }, k: [{ l: 2, b: 1, z: 3 }, 4, 5] }))
       .to.equal(jsum.serialize({ a: { c: 1, z: { a: 1, b: 2, k: 3, l: 4 } }, k: [{ b: 1, l: 2, z: 3 }, 4, 5], x: 3 }))
+  })
+
+  it('should ignore order of arrays', function() {
+    expect(jsum.serialize([ { x: 3 }, { a: [4, { b: 5 } ] } ]))
+      .to.equal(jsum.serialize([ { a: [{ b: 5 }, 4 ] }, { x: 3 } ]))
   })
 })
